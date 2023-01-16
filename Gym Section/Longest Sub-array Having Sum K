@@ -1,0 +1,49 @@
+//https://course.acciojob.com/idle?question=00d425f1-a20e-4549-afb2-4e1cd07ad3fd
+
+
+import java.util.*;
+
+public class Main
+{
+    static int subarraySum(int[] arr, int k) {
+    //Write your code here  
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int ans = 0;
+		map.put(0, 0);
+		int sum = 0;
+		int i = 0;
+		while(i < arr.length){
+			sum+=arr[i];
+			i++;
+			if(map.containsKey(sum - k)){
+				int val = (i-map.get(sum-k));
+				if(val > ans){
+					ans = val;
+				}
+			}
+			if(!map.containsKey(sum)){
+				map.put(sum, i);
+			}
+		}
+		if(ans == Integer.MIN_VALUE){
+			return 0;
+		}
+		return ans;
+    }
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int t = input.nextInt();
+		for(int i=0; i<t; i++)
+		{
+		    int n, k;
+		    n=input.nextInt();
+		    k=input.nextInt();
+	        int arr[] = new int[n];
+	        for(int j=0; j<n; j++)
+	        {
+	            arr[j] = input.nextInt();
+	        }
+	        System.out.println(subarraySum(arr,k));
+		}
+	}
+}
